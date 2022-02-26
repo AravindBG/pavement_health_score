@@ -12,11 +12,10 @@ def validate_file_ext(exten):
 
 
 def read_csv(path):
-    # Open CSV
-    # file = open(path)
-    # print(type(file))
-    # Read from the CSV file
-    with open(path, encoding='utf-8') as file:
+    try:
+        # Open csv
+        file = open(path, encoding='cp1252')
+        # Read from the csv file
         csvreader = csv.reader(file)
         # Extract the field/header names
         headers = []
@@ -28,7 +27,12 @@ def read_csv(path):
         for row in csvreader:
             rows.append(row)
         print(rows)
-        # file.close()
+
+    except:
+        raise Exception(
+            'Unable to open the file. Check the encoding of the csv file')
+    finally:
+        file.close()
 
 
     # Read from the input arguments
